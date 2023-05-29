@@ -89,11 +89,14 @@ void Client::send_request(std::string request)
 void Client::recv_responce()
 {
 	int res = 0;
-	std::cout << "Process receiving..." << std::endl;
+	std::cout << "Process receiving...\n" << std::endl;
 	res = recv(sock, &recv_buf[0], recv_len, 0);
 	if (res > 0)
 	{
-		printf("Bytes received: %d\n", res);
+		printf("Bytes received: %d\n\n", res);
+
+
+
 		std::cout << recv_buf.c_str() << std::endl;
 		recv_buf.clear();
 	}
