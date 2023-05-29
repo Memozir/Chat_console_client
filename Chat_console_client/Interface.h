@@ -1,21 +1,22 @@
 #pragma once
 #include <iostream>
+#include <string>
 
 #include "RequestParser.h"
 #include "Protocol.h"
-#include <string>
+#include "User.h"
 
 class Interface
 {
 public:
-	void start();
-	void main_choice(int choice);
+	std::string start();
+	std::string main_choice(int choice = NULL, User *user=nullptr, bool enter_mode = false);
 	void error();
 
-	std::vector<std::string> send_message();
+	std::vector<std::string> send_message(User* user);
 	std::vector<std::string> registration();
-	std::vector<std::string> auth();
-	std::vector<std::string> user_list();
-	std::vector<std::string> message_from();
+	std::vector<std::string> auth(User* user);
+	std::vector<std::string> user_list(User* user);
+	std::vector<std::string> message_from(User* user);
 };
 

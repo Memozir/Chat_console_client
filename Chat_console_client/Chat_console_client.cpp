@@ -15,10 +15,13 @@ int __cdecl main(int argc, const char* argv[])
     client.init(argc, argv);
     client.socket_init(argc, argv);
     std::string response;
+    client.recv_responce();
 
     Interface inter;
 
-    inter.start();
+    std::string result = inter.start();
+    client.send_request(result);
+    client.recv_responce();
 
     while (true)
     {

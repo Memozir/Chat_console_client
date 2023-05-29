@@ -3,10 +3,16 @@
 #include <WS2tcpip.h>
 #include <iostream>
 
+//#include "RequestParser.h"
+#include "Protocol.h"
+#include "User.h"
+
 #pragma comment(lib, "Ws2_32.lib")
 class Client
 {
 public:
+
+	User user;
 
 	Client(){};
 	//~Client();
