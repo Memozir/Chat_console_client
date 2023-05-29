@@ -3,18 +3,19 @@
 
 #include "RequestParser.h"
 #include "Protocol.h"
+#include <string>
 
 class Interface
 {
 public:
 	void start();
-	void main_choice();
+	void main_choice(int choice);
 	void error();
 
-	void send_message(std::vector<std::string> entities);
-	void registration(std::vector<std::string> entities);
-	void auth(std::vector<std::string> entities);
-	void user_list(std::vector<std::string> entities);
-	void message_from(std::vector<std::string> entities);
+	std::vector<std::string> send_message();
+	std::vector<std::string> registration();
+	std::vector<std::string> auth();
+	std::vector<std::string> user_list();
+	std::vector<std::string> message_from();
 };
 

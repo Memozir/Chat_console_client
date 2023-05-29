@@ -1,13 +1,17 @@
 #pragma once
 
 #include "RequestParser.h"
-#include "Db.h"
-#include "Server.h"
 
 class Protocol
 {
 private:
 	RequestParser::Request* request;
+
+	std::string generate_response(std::vector<std::string>* db_result);
+
+public:
+	Protocol(std::string request);
+	//~Protocol();
 
 	enum class Operations
 	{
@@ -19,12 +23,6 @@ private:
 		SEND_MESSAGE,
 		DISCONNECT
 	};
-
-	std::string generate_response(std::vector<std::string>* db_result);
-
-public:
-	Protocol(std::string request);
-	//~Protocol();
 
 	//std::string get_response();
 	std::string response(std::vector<std::string> users);

@@ -6,7 +6,7 @@ void Interface::start()
 	std::cout << "Authentication - 2\n";
 }
 
-void Interface::main_choice()
+void Interface::main_choice(int choice)
 {
 	std::cout << "View users - 2\n";
 	std::cout << "View messages - 3\n";
@@ -14,7 +14,9 @@ void Interface::main_choice()
 	std::cout << "Send message - 5\n";
 	std::cout << "Dissconnect - 6\n";
 
-	switch ((Protocol::Operations)request->code)
+	std::vector<std::string> result;
+
+	switch ((Protocol::Operations)choice)
 	{
 	case Protocol::Operations::REGISTRATION:
 		result = registration(request->entities);

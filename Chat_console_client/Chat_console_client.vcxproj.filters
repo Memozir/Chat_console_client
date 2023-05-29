@@ -27,10 +27,10 @@
     <ClCompile Include="Interface.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Memozir\Chat_console_server\Chat_console\Protocol.cpp">
+    <ClCompile Include="Protocol.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Memozir\Chat_console_server\Chat_console\RequestParser.cpp">
+    <ClCompile Include="RequestParser.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,10 +44,10 @@
     <ClInclude Include="Interface.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Memozir\Chat_console_server\Chat_console\Protocol.h">
+    <ClInclude Include="Protocol.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Memozir\Chat_console_server\Chat_console\RequestParser.h">
+    <ClInclude Include="RequestParser.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

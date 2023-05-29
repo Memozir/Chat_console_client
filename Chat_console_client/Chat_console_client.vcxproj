@@ -139,18 +139,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Memozir\Chat_console_server\Chat_console\Protocol.cpp" />
-    <ClCompile Include="..\..\Memozir\Chat_console_server\Chat_console\RequestParser.cpp" />
     <ClCompile Include="Chat_console_client.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Interface.cpp" />
+    <ClCompile Include="Protocol.cpp" />
+    <ClCompile Include="RequestParser.cpp" />
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Memozir\Chat_console_server\Chat_console\Protocol.h" />
-    <ClInclude Include="..\..\Memozir\Chat_console_server\Chat_console\RequestParser.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Interface.h" />
+    <ClInclude Include="Protocol.h" />
+    <ClInclude Include="RequestParser.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
