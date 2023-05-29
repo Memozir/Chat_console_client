@@ -2,9 +2,11 @@
 //
 
 #include <iostream>
+#include "string"
 
 #include "Client.h"
-#include "string"
+#include "Interface.h"
+#include "User.h"
 
 int __cdecl main(int argc, const char* argv[])
 {
@@ -13,11 +15,16 @@ int __cdecl main(int argc, const char* argv[])
     client.init(argc, argv);
     client.socket_init(argc, argv);
     std::string response;
+
+    Interface inter;
+
+    inter.start();
+
     while (true)
     {
         getline(std::cin, response);
 
-        if (response.compare("exit") == 0)
+        if (response.compare("0") == 0)
         {
             break;
         }
