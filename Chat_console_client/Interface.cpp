@@ -14,7 +14,34 @@ std::string Interface::start()
 
 std::vector<std::string> Interface::send_message(User* user)
 {
+	int user_count;
+	std::vector<std::string> result, recievers;
+	result.push_back("5");
+	result.push_back(user->username);
 
+	std::cout << "Enter user count to send: \n";
+	std::cin >> user_count;
+
+	for (int i = 0; i < user_count; i++)
+	{
+		std::cout << "Enter user " + std::to_string(i++) << " : \n";
+		std::string reciever;
+		std::cin >> reciever;
+		recievers.push_back(reciever);
+	}
+
+	std::string message;
+	std::cout << "Enter message (max 500 symbols): \n";
+	std::cin >> message;
+
+	result.push_back(message);
+
+	for (int i = 0; i < user_count; i++)
+	{
+		result.push_back(recievers.at(i));
+	}
+
+	return result;
 }
 
 std::vector<std::string> Interface::registration()
@@ -55,12 +82,25 @@ std::vector<std::string> Interface::auth(User* user)
 
 std::vector<std::string> Interface::user_list(User* user)
 {
+	std::vector<std::string> result;
+	result.push_back("2");
+	result.push_back(user->username);
 
+	return result;
 }
 
 std::vector<std::string> Interface::message_from(User* user)
 {
+	std::vector<std::string> result;
+	result.push_back("4");
+	result.push_back(user->username);
 
+	std::string user_from;
+	std::cout << "Enter whose messages to read: \n";
+	std::cin >> user_from;
+	result.push_back(user_from);
+
+	return result;
 }
 
 std::string Interface::main_choice(int choice = NULL, User* user = nullptr, bool enter_mode = false)
