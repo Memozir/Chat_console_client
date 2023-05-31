@@ -30,7 +30,7 @@ std::string Protocol::generate_response(std::vector<std::string>* db_result)
 
 std::vector<std::string>* Protocol::registration(std::vector<std::string> entities)
 {
-	Db db;
+	std::vector<std::string> result;
 	return db.registrate(entities.at(0), entities.at(1));
 }
 std::vector<std::string>* Protocol::auth(std::vector<std::string> entities)

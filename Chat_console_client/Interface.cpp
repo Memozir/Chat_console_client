@@ -103,6 +103,15 @@ std::vector<std::string> Interface::message_from(User* user)
 	return result;
 }
 
+std::vector<std::string> message_count(User* user)
+{
+	std::vector<std::string> result;
+	result.push_back("3");
+	result.push_back(user->username);
+
+	return result;
+}
+
 std::string Interface::main_choice(int choice = NULL, User* user = nullptr, bool enter_mode = false)
 {
 	if (enter_mode)
@@ -133,7 +142,7 @@ std::string Interface::main_choice(int choice = NULL, User* user = nullptr, bool
 		result = user_list(user);
 		break;
 	case Protocol::Operations::USER_MESSAGE:
-		result = get_user_msg();
+		result = message_from(user);
 		break;
 	case Protocol::Operations::SEND_MESSAGE:
 		result = send_message(user);
@@ -144,6 +153,110 @@ std::string Interface::main_choice(int choice = NULL, User* user = nullptr, bool
 		break;
 	}
 
+}
+
+void Interface::display_registration(std::vector<std::string> data)
+{
+	if (data.at(0).compare("1"))
+	{
+		std::cout << "Registration failed: username already exists\n";
+		return;
+	}
+
+	std::cout << "Registration was success!\n";
+}
+
+void Interface::display_auth(std::vector<std::string> data)
+{
+	if (data.at(0).compare("1"))
+	{
+		std::cout << "Authentication failed\n";
+		return;
+	}
+
+	std::cout << "Authentication was success!\n";
+}
+
+void Interface::display_send_message(std::vector<std::string> data)
+{
+	if (data.at(0).compare("1"))
+	{
+		std::cout << "Operation send message failed\n";
+		return;
+	}
+
+	std::cout << "Message was successfully sended\n";
+}
+void Interface::display_user_list(std::vector<std::string> data)
+{
+	if (data.at(0).compare("1"))
+	{
+		std::cout << "User list display error\n";
+		return;
+	}
+
+	if (data.empty())
+	{
+		std::cout << "No one is online\n";
+		return;
+	}
+
+	std::cout << "Users online:\n";
+	for (int i = 0; i < data.size(); i++)
+	{
+		std::cout << data.at(i) << std::endl;
+	}
+
+	std::cout << "\n";
+}
+
+void Interface::display_message_from(std::vector<std::string> data)
+{
+	if (data.at(0).compare("1"))
+	{
+		std::cout << "Registration failed: username already exists\n";
+		return;
+	}
+}
+void Interface::display_message_count(std::vector<std::string> data)
+{
+	if (data.at(0).compare("1"))
+	{
+		std::cout << "Registration failed: username already exists\n";
+		return;
+	}
+}
+
+void Interface::display(std::string response)
+{
+	RequestParser parser(response);
+	RequestParser::Request* response_entity = parser.parse();
+
+	switch ((Protocol::Operations)response_entity->code)
+	{
+	case Protocol::Operations::REGISTRATION:
+		display_registration(response_entity->entities);
+		break;
+	case Protocol::Operations::AUTH:
+		display_auth(response_entity->entities);
+		break;
+	case Protocol::Operations::MESSAGE_LIST:
+		display_message_count(response_entity->entities);
+		break;
+	case Protocol::Operations::USER_LIST:
+		display_user_list(response_entity->entities);
+		break;
+	case Protocol::Operations::USER_MESSAGE:
+		display_message_from(response_entity->entities);
+		break;
+	case Protocol::Operations::SEND_MESSAGE:
+		display_send_message(response_entity->entities);
+		break;
+	//case Protocol::Operations::DISCONNECT:
+	//	std::string dissconnect = "0";
+	//	return dissconnect;
+	//	break;
+	}
 }
 
 void Interface::error()
