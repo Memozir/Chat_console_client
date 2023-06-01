@@ -2,8 +2,8 @@
 
 std::string Interface::start()
 {
-	std::cout << "Registration - 1\n";
-	std::cout << "Authentication - 2\n";
+	std::cout << "Registration - 0\n";
+	std::cout << "Authentication - 1\n";
 
 	int choice;
 
@@ -103,7 +103,7 @@ std::vector<std::string> Interface::message_from(User* user)
 	return result;
 }
 
-std::vector<std::string> message_count(User* user)
+std::vector<std::string> Interface::message_count(User* user)
 {
 	std::vector<std::string> result;
 	result.push_back("3");
@@ -112,7 +112,7 @@ std::vector<std::string> message_count(User* user)
 	return result;
 }
 
-std::string Interface::main_choice(int choice = NULL, User* user = nullptr, bool enter_mode = false)
+std::string Interface::main_choice(int choice, User* user, bool enter_mode)
 {
 	if (enter_mode)
 	{
@@ -152,7 +152,8 @@ std::string Interface::main_choice(int choice = NULL, User* user = nullptr, bool
 		return dissconnect;
 		break;
 	}
-
+	
+	return generate_response(&result);
 }
 
 void Interface::display_registration(std::vector<std::string> data)
@@ -214,16 +215,28 @@ void Interface::display_message_from(std::vector<std::string> data)
 {
 	if (data.at(0).compare("1"))
 	{
-		std::cout << "Registration failed: username already exists\n";
+		std::cout << "No user with such username\n";
 		return;
 	}
+
+	for (int i = 0; i < data.size(); i++)
+	{
+		std::cout << i << ". " << data.at(i) << "\n";
+	}
+
+	std::cout << "\n";
 }
 void Interface::display_message_count(std::vector<std::string> data)
 {
 	if (data.at(0).compare("1"))
 	{
-		std::cout << "Registration failed: username already exists\n";
+		std::cout << "Message count error\n";
 		return;
+	}
+
+	for (int i = 0; i < data.size() - 2; i + 2)
+	{
+		std::cout << data.at(i) << ": " << data.at(i + 1) << "\n";
 	}
 }
 

@@ -95,11 +95,10 @@ void Client::recv_responce()
 	{
 		printf("Bytes received: %d\n\n", res);
 
-		//Display resonse
-		Protocol prot(recv_buf);
-		//prot.display();
+		Interface inter;
+		inter.display(recv_buf);
 
-		std::cout << recv_buf.c_str() << std::endl;
+		//std::cout << recv_buf.c_str() << std::endl;
 		recv_buf.clear();
 	}
 	else if (res == 0)

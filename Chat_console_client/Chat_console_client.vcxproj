@@ -151,7 +151,6 @@
     <ClInclude Include="Interface.h" />
     <ClInclude Include="Protocol.h" />
     <ClInclude Include="RequestParser.h" />
-    <ClInclude Include="User.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

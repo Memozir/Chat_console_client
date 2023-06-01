@@ -5,7 +5,7 @@
 
 //#include "RequestParser.h"
 #include "Protocol.h"
-#include "User.h"
+#include "Interface.h"
 
 #pragma comment(lib, "Ws2_32.lib")
 class Client

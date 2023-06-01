@@ -4,7 +4,7 @@
 
 #include "RequestParser.h"
 #include "Protocol.h"
-#include "User.h"
+#include "User.cpp"
 
 class Interface
 {

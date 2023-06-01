@@ -6,7 +6,6 @@
 
 #include "Client.h"
 #include "Interface.h"
-#include "User.h"
 
 int __cdecl main(int argc, const char* argv[])
 {
@@ -14,8 +13,7 @@ int __cdecl main(int argc, const char* argv[])
   
     client.init(argc, argv);
     client.socket_init(argc, argv);
-    std::string response;
-    client.recv_responce();
+    //std::string response;
 
     Interface inter;
 
@@ -25,14 +23,15 @@ int __cdecl main(int argc, const char* argv[])
 
     while (true)
     {
-        getline(std::cin, response);
+        //getline(std::cin, response);
+        std::string request = inter.main_choice(NULL, &client.user, true);
+        client.send_request(request);
 
-        if (response.compare("0") == 0)
-        {
-            break;
-        }
+        //if (response.compare("0") == 0)
+        //{
+        //    break;
+        //}
 
-        client.send_request(response);
         client.recv_responce();
     }
 
