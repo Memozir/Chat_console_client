@@ -17,14 +17,15 @@ int __cdecl main(int argc, const char* argv[])
 
     Interface inter;
 
-    std::string result = inter.start();
+    std::string result = inter.start(client.user);
+    std::cout << "\n-------\n" << result << "\n-------\n";
     client.send_request(result);
     client.recv_responce();
 
     while (true)
     {
         //getline(std::cin, response);
-        std::string request = inter.main_choice(NULL, &client.user, true);
+        std::string request = inter.main_choice(client.user, NULL, true);
         client.send_request(request);
 
         //if (response.compare("0") == 0)

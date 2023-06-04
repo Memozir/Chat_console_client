@@ -2,14 +2,14 @@
 
 #include "RequestParser.h"
 
-std::string generate_response(std::vector<std::string>* db_result);
+std::string generate_response(std::vector<std::string> db_result);
 
 class Protocol
 {
 private:
 	RequestParser::Request* request;
 
-	std::string generate_response(std::vector<std::string>* db_result);
+	std::string generate_response(std::vector<std::string> db_result);
 
 public:
 	Protocol(std::string request);

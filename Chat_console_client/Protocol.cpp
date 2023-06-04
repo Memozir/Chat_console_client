@@ -1,9 +1,9 @@
 #include "Protocol.h"
 
-std::string generate_response(std::vector<std::string>* db_result)
+std::string generate_response(std::vector<std::string> db_result)
 {
 	std::string response;
-	int size = db_result->size();
+	int size = db_result.size();
 
 	if (size == 0)
 	{
@@ -13,12 +13,12 @@ std::string generate_response(std::vector<std::string>* db_result)
 
 	for (int i = 0; i < size; i++)
 	{
-		response += db_result->at(i);
+		response += db_result.at(i);
 
 		if (i != size - 1)
 			response += '/';
 	}
-
+	std::cout << "\n---GENERATE RESPONSE---\n" << response << "\n---GENERATE RESPONSE---\n";
 	return response;
 }
 

@@ -1,6 +1,6 @@
 #include "Interface.h"
 
-std::string Interface::start()
+std::string Interface::start(User &user)
 {
 	std::cout << "Registration - 0\n";
 	std::cout << "Authentication - 1\n";
@@ -9,15 +9,21 @@ std::string Interface::start()
 
 	std::cin >> choice;
 
-	return main_choice(choice, nullptr, false);
+	return main_choice(user, choice, false);
 }
 
-std::vector<std::string> Interface::send_message(User* user)
+std::vector<std::string> Interface::send_message(User& user)
 {
 	int user_count;
 	std::vector<std::string> result, recievers;
 	result.push_back("5");
-	result.push_back(user->username);
+	result.push_back(user.username);
+
+	std::string message;
+	std::cout << "Enter message (max 500 symbols): \n";
+	std::cin >> message;
+
+	result.push_back(message);
 
 	std::cout << "Enter user count to send: \n";
 	std::cin >> user_count;
@@ -27,18 +33,7 @@ std::vector<std::string> Interface::send_message(User* user)
 		std::cout << "Enter user " + std::to_string(i++) << " : \n";
 		std::string reciever;
 		std::cin >> reciever;
-		recievers.push_back(reciever);
-	}
-
-	std::string message;
-	std::cout << "Enter message (max 500 symbols): \n";
-	std::cin >> message;
-
-	result.push_back(message);
-
-	for (int i = 0; i < user_count; i++)
-	{
-		result.push_back(recievers.at(i));
+		result.push_back(reciever);
 	}
 
 	return result;
@@ -62,7 +57,7 @@ std::vector<std::string> Interface::registration()
 	return result;
 }
 
-std::vector<std::string> Interface::auth(User* user)
+std::vector<std::string> Interface::auth(User& user)
 {
 	std::string username, password;
 
@@ -72,6 +67,9 @@ std::vector<std::string> Interface::auth(User* user)
 	std::cout << "Enter password: \n";
 	std::cin >> password;
 
+	user.username = username;
+	user.pass = password;
+
 	std::vector<std::string> result;
 	result.push_back("1");
 	result.push_back(username);
@@ -80,20 +78,20 @@ std::vector<std::string> Interface::auth(User* user)
 	return result;
 }
 
-std::vector<std::string> Interface::user_list(User* user)
+std::vector<std::string> Interface::user_list(User& user)
 {
 	std::vector<std::string> result;
 	result.push_back("2");
-	result.push_back(user->username);
+	result.push_back(user.username);
 
 	return result;
 }
 
-std::vector<std::string> Interface::message_from(User* user)
+std::vector<std::string> Interface::message_from(User& user)
 {
 	std::vector<std::string> result;
 	result.push_back("4");
-	result.push_back(user->username);
+	result.push_back(user.username);
 
 	std::string user_from;
 	std::cout << "Enter whose messages to read: \n";
@@ -103,16 +101,16 @@ std::vector<std::string> Interface::message_from(User* user)
 	return result;
 }
 
-std::vector<std::string> Interface::message_count(User* user)
+std::vector<std::string> Interface::message_count(User& user)
 {
 	std::vector<std::string> result;
 	result.push_back("3");
-	result.push_back(user->username);
+	result.push_back(user.username);
 
 	return result;
 }
 
-std::string Interface::main_choice(int choice, User* user, bool enter_mode)
+std::string Interface::main_choice(User& user, int choice, bool enter_mode)
 {
 	if (enter_mode)
 	{
@@ -153,7 +151,7 @@ std::string Interface::main_choice(int choice, User* user, bool enter_mode)
 		break;
 	}
 	
-	return generate_response(&result);
+	return generate_response(result);
 }
 
 void Interface::display_registration(std::vector<std::string> data)
@@ -196,7 +194,7 @@ void Interface::display_user_list(std::vector<std::string> data)
 		return;
 	}
 
-	if (data.empty())
+	if (data.empty() == 0)
 	{
 		std::cout << "No one is online\n";
 		return;
@@ -213,7 +211,7 @@ void Interface::display_user_list(std::vector<std::string> data)
 
 void Interface::display_message_from(std::vector<std::string> data)
 {
-	if (data.at(0).compare("1"))
+	if (data.at(0).compare("0") == 0)
 	{
 		std::cout << "No user with such username\n";
 		return;
@@ -228,7 +226,7 @@ void Interface::display_message_from(std::vector<std::string> data)
 }
 void Interface::display_message_count(std::vector<std::string> data)
 {
-	if (data.at(0).compare("1"))
+	if (data.at(0).compare("0") == 0)
 	{
 		std::cout << "Message count error\n";
 		return;
@@ -236,34 +234,37 @@ void Interface::display_message_count(std::vector<std::string> data)
 
 	for (int i = 0; i < data.size() - 2; i + 2)
 	{
-		std::cout << data.at(i) << ": " << data.at(i + 1) << "\n";
+		//std::cout << data.at(i) << ": " << data.at(i + 1) << "\n";
 	}
 }
 
 void Interface::display(std::string response)
 {
+	std::cout << "\n---RESPON----\n" << response << "\n---RESPON----\n";
 	RequestParser parser(response);
-	RequestParser::Request* response_entity = parser.parse();
+	RequestParser::Request response_entity = parser.parse();
+	//Parse resonse
+	parser
 
-	switch ((Protocol::Operations)response_entity->code)
+	switch ((Protocol::Operations)response_entity.code)
 	{
 	case Protocol::Operations::REGISTRATION:
-		display_registration(response_entity->entities);
+		display_registration(response_entity.entities);
 		break;
 	case Protocol::Operations::AUTH:
-		display_auth(response_entity->entities);
+		display_auth(response_entity.entities);
 		break;
 	case Protocol::Operations::MESSAGE_LIST:
-		display_message_count(response_entity->entities);
+		display_message_count(response_entity.entities);
 		break;
 	case Protocol::Operations::USER_LIST:
-		display_user_list(response_entity->entities);
+		display_user_list(response_entity.entities);
 		break;
 	case Protocol::Operations::USER_MESSAGE:
-		display_message_from(response_entity->entities);
+		display_message_from(response_entity.entities);
 		break;
 	case Protocol::Operations::SEND_MESSAGE:
-		display_send_message(response_entity->entities);
+		display_send_message(response_entity.entities);
 		break;
 	//case Protocol::Operations::DISCONNECT:
 	//	std::string dissconnect = "0";

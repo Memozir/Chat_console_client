@@ -98,7 +98,7 @@ void Client::recv_responce()
 		Interface inter;
 		inter.display(recv_buf);
 
-		//std::cout << recv_buf.c_str() << std::endl;
+		std::cout << "\n-------\n" << recv_buf.c_str() << "\n-------\n";
 		recv_buf.clear();
 	}
 	else if (res == 0)
@@ -106,24 +106,9 @@ void Client::recv_responce()
 	else
 	{
 		std::cout << "Recieve failed: " << WSAGetLastError() << std::endl;
-		exit(1);
+		//exit(1);
+		return;
 	}
-	//do {
-	//	res = recv(sock, &recv_buf[0], recv_len, 0);
-	//	if (res > 0)
-	//	{
-	//		printf("Bytes received: %d\n", res);
-	//		std::cout << recv_buf.c_str() << std::endl;
-	//		send_request(recv_buf);
-	//		recv_buf.clear();
-	//	}
-	//	else if (res == 0)
-	//		printf("Connection closed\n");
-	//	else
-	//		std::cout << "Recieve failed: " << WSAGetLastError() << std::endl;
-	//		exit(1);
-
-	//} while (true);
 }
 
 void Client::clean()
