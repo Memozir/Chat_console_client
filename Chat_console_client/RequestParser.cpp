@@ -17,11 +17,14 @@ RequestParser::RequestParser(std::string request)
 {
 	std::cout << request.c_str();
 	size = get_str_size(request);
+	//std::cout << "\n--SIZE--\n" << this->size << "\n--SIZE--\n";
 	//this->request.copy(&request[0], size);
 	for (int i = 0; i < size; i++)
 	{
 		this->request.push_back(request.c_str()[i]);
 	}
+
+	//std::cout << "\n--RequestParser--\n" << this->request << "\n--RequestParser--\n";
 }
 
 int RequestParser::get_code()
@@ -52,22 +55,22 @@ RequestParser::Request RequestParser::parse()
 
 	for (int i = 0; i < size; i++)
 	{
-		if (request[i] != '/')
-		{
-			buf += request[i];
-		}
-		else
+		if (request[i] == '/')
 		{
 			entities.push_back(buf);
 			buf.clear();
 		}
+		else
+		{
+			buf += request[i];
+		}
 	}
 	entities.push_back(buf);
 	int code = get_code();
-	Request request = {
+	Request request_result = {
 		code,
 		entities
 	};
 
-	return request;
+	return request_result;
 }

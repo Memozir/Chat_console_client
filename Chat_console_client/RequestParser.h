@@ -2,6 +2,8 @@
 #include <iostream>
 #include <vector>
 
+int get_str_size(std::string str);
+
 class RequestParser
 {
 private:

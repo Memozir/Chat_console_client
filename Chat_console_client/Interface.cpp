@@ -232,20 +232,17 @@ void Interface::display_message_count(std::vector<std::string> data)
 		return;
 	}
 
-	for (int i = 0; i < data.size() - 2; i + 2)
+	for (int i = 0; i < data.size(); i++)
 	{
-		//std::cout << data.at(i) << ": " << data.at(i + 1) << "\n";
+		std::cout << data.at(i)<< "\n";
 	}
 }
 
 void Interface::display(std::string response)
 {
-	std::cout << "\n---RESPON----\n" << response << "\n---RESPON----\n";
 	RequestParser parser(response);
 	RequestParser::Request response_entity = parser.parse();
-	//Parse resonse
-	parser
-
+	
 	switch ((Protocol::Operations)response_entity.code)
 	{
 	case Protocol::Operations::REGISTRATION:

@@ -94,11 +94,8 @@ void Client::recv_responce()
 	if (res > 0)
 	{
 		printf("Bytes received: %d\n\n", res);
-
 		Interface inter;
 		inter.display(recv_buf);
-
-		std::cout << "\n-------\n" << recv_buf.c_str() << "\n-------\n";
 		recv_buf.clear();
 	}
 	else if (res == 0)
