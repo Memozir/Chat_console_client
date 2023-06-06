@@ -21,7 +21,7 @@ public:
 	void socket_init(int argc, const char* argv[]);
 	void shutdown_connection(int type);
 	void send_request(std::string request);
-	void recv_responce();
+	int recv_responce();
 	void clean();
 
 private:

@@ -13,7 +13,6 @@ private:
 
 public:
 	Protocol(std::string request);
-	//~Protocol();
 
 	enum class Operations
 	{
@@ -25,16 +24,6 @@ public:
 		SEND_MESSAGE,
 		DISCONNECT
 	};
-
-	//std::string get_response();
-	std::string response(std::vector<std::string> users);
-
-	std::vector<std::string>* registration(std::vector<std::string>);
-	std::vector<std::string>* auth(std::vector<std::string>);
-	//std::vector<std::string>* user_list(std::vector<std::string>);
-	std::vector<std::string>* send_message(std::vector<std::string>);
-	std::vector<std::string>* get_user_msg(std::vector<std::string>);
-	std::vector<std::string>* message_count(std::vector<std::string>);
 
 };
 

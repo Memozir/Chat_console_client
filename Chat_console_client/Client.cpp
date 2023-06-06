@@ -86,7 +86,7 @@ void Client::send_request(std::string request)
 	}
 }
 
-void Client::recv_responce()
+int Client::recv_responce()
 {
 	int res = 0;
 	std::cout << "Process receiving...\n" << std::endl;
@@ -103,8 +103,7 @@ void Client::recv_responce()
 	else
 	{
 		std::cout << "Recieve failed: " << WSAGetLastError() << std::endl;
-		//exit(1);
-		return;
+		return 0;
 	}
 }
 

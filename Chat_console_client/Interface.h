@@ -9,16 +9,18 @@
 class Interface
 {
 private:
-	void display_registration(std::vector<std::string> data);
-	void display_auth(std::vector<std::string> data);
-	void display_send_message(std::vector<std::string> data);
-	void display_user_list(std::vector<std::string> data);
-	void display_message_from(std::vector<std::string> data);
-	void display_message_count(std::vector<std::string> data);
+	//Interface() {};
+
+	int display_registration(std::vector<std::string> data);
+	int display_auth(std::vector<std::string> data);
+	int display_send_message(std::vector<std::string> data);
+	int display_user_list(std::vector<std::string> data);
+	int display_message_from(std::vector<std::string> data);
+	int display_message_count(std::vector<std::string> data);
 public:
 	std::string start(User &user);
 	std::string main_choice(User& user, int choice = NULL, bool enter_mode = false);
-	void display(std::string response);
+	int display(std::string response);
 	void error();
 
 	std::vector<std::string> send_message(User& user);

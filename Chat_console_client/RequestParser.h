@@ -12,11 +12,8 @@ private:
 
 	int get_code();
 
-	//Request* request_entity;
-
 public:
 	RequestParser(std::string request);
-	//~RequestParser();
 
 	int size = 0;
 

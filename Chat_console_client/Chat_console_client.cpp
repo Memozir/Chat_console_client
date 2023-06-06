@@ -16,26 +16,24 @@ int __cdecl main(int argc, const char* argv[])
     //std::string response;
 
     Interface inter;
-
-    std::string result = inter.start(client.user);
-    //std::cout << "\n-------\n" << result << "\n-------\n";
-    client.send_request(result);
-    client.recv_responce();
+    int resp_status = 0;
+    do
+    {
+        std::string result = inter.start(client.user);
+        //std::cout << "\n-------\n" << result << "\n-------\n";
+        client.send_request(result);
+        resp_status = client.recv_responce();
+    } while ( resp_status == 0 || resp_status == 2 );
 
     while (true)
     {
-        //getline(std::cin, response);
-        std::string request = inter.main_choice(client.user, NULL, true);
-        client.send_request(request);
-
-        //if (response.compare("0") == 0)
-        //{
-        //    break;
-        //}
-
-        client.recv_responce();
+        do
+        {
+            std::string request = inter.main_choice(client.user, NULL, true);
+            client.send_request(request);
+        } while (client.recv_responce() == 0);
+      
     }
-
     
     client.shutdown_connection(SD_BOTH);
     client.clean();
