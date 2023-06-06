@@ -13,7 +13,6 @@ int __cdecl main(int argc, const char* argv[])
   
     client.init(argc, argv);
     client.socket_init(argc, argv);
-    //std::string response;
 
     Interface inter;
     int resp_status = 0;

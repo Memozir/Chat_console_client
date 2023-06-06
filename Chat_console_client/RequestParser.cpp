@@ -17,14 +17,11 @@ RequestParser::RequestParser(std::string request)
 {
 	std::cout << request.c_str();
 	size = get_str_size(request);
-	//std::cout << "\n--SIZE--\n" << this->size << "\n--SIZE--\n";
-	//this->request.copy(&request[0], size);
+
 	for (int i = 0; i < size; i++)
 	{
 		this->request.push_back(request.c_str()[i]);
 	}
-
-	//std::cout << "\n--RequestParser--\n" << this->request << "\n--RequestParser--\n";
 }
 
 int RequestParser::get_code()
@@ -48,8 +45,6 @@ void RequestParser::print_parsed()
 
 RequestParser::Request RequestParser::parse()
 {
-	//int request_len = this->request.size();
-	//int request_len = get_str_size(this->request);
 	std::string buf;
 
 	for (int i = 0; i < size; i++)

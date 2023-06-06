@@ -76,7 +76,7 @@ void Client::shutdown_connection(int type)
 
 void Client::send_request(std::string request)
 {
-	int res = send(sock, request.c_str(), request.size(), 0);
+	int res = send(sock, request.c_str(), request.size() + 1, 0);
 	if (res == SOCKET_ERROR)
 	{
 		std::cout << "Send failed: " << WSAGetLastError();
@@ -95,7 +95,16 @@ int Client::recv_responce()
 	{
 		printf("Bytes received: %d\n\n", res);
 		Interface inter;
-		inter.display(recv_buf);
+
+		std::string new_request;
+
+		for (int i = 0; i < res; i++)
+		{
+			new_request += recv_buf.c_str()[i];
+		}
+		new_request += "\0";
+
+		inter.display(new_request);
 		recv_buf.clear();
 	}
 	else if (res == 0)

@@ -1,13 +1,5 @@
 #include "Interface.h"
 
-void size_last_entity(std::vector<std::string> &entities)
-{
-	int last_index = entities.size() - 1;
-	int last_size = entities.at(last_index).size();
-	auto it = entities.end();
-	entities.insert(it - 1, std::to_string(last_size));
-}
-
 std::string Interface::start(User &user)
 {
 	std::cout << "Registration - 0\n";
@@ -43,7 +35,7 @@ std::vector<std::string> Interface::send_message(User& user)
 		std::cin >> reciever;
 		result.push_back(reciever);
 	}
-	size_last_entity(result);
+	//size_last_entity(result);
 	return result;
 }
 
@@ -61,7 +53,7 @@ std::vector<std::string> Interface::registration()
 	result.push_back("0");
 	result.push_back(username);
 	result.push_back(password);
-	size_last_entity(result);
+	//size_last_entity(result);
 
 	return result;
 }
@@ -83,7 +75,7 @@ std::vector<std::string> Interface::auth(User& user)
 	result.push_back("1");
 	result.push_back(username);
 	result.push_back(password);
-	size_last_entity(result);
+	//size_last_entity(result);
 
 	return result;
 }
@@ -93,7 +85,7 @@ std::vector<std::string> Interface::user_list(User& user)
 	std::vector<std::string> result;
 	result.push_back("2");
 	result.push_back(user.username);
-	size_last_entity(result);
+	//size_last_entity(result);
 	return result;
 }
 
@@ -107,7 +99,7 @@ std::vector<std::string> Interface::message_from(User& user)
 	std::cout << "Enter whose messages to read: \n";
 	std::cin >> user_from;
 	result.push_back(user_from);
-	size_last_entity(result);
+	//size_last_entity(result);
 	return result;
 }
 
@@ -116,7 +108,7 @@ std::vector<std::string> Interface::message_count(User& user)
 	std::vector<std::string> result;
 	result.push_back("3");
 	result.push_back(user.username);
-	size_last_entity(result);
+	//size_last_entity(result);
 	return result;
 }
 
